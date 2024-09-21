@@ -1,0 +1,251 @@
++*In[1]:*+
+[source, ipython3]
+----
+import pandas as pd
+url = "https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-05/villagers.csv"
+df = pd.read_csv(url)
+df.isna().sum()
+----
+
+
++*Out[1]:*+
+----row_n           0
+id              1
+name            0
+gender          0
+species         0
+birthday        0
+personality     0
+song           11
+phrase          0
+full_id         0
+url             0
+dtype: int64----
+
+
+
+
++*In[3]:*+
+[source, ipython3]
+----
+import pandas as pd
+url = "https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-05/villagers.csv"
+df = pd.read_csv(url)
+df.shape
+----
+
+
++*Out[3]:*+
+----(391, 11)----
+
+
+
+
+
+
++*In[4]:*+
+[source, ipython3]
+----
+import pandas as pd
+url = "https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-05/villagers.csv"
+villagers_data = pd.read_csv(url)
+villagers_data.info()
+villagers_data.describe()
+villagers_data.describe(include='all')
+villagers_data.isnull().sum()
+villagers_data.head()
+villagers_data['species'].value_counts()
+villagers_data['gender'].value_counts()
+----
+
+
++*Out[4]:*+
+----
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 391 entries, 0 to 390
+Data columns (total 11 columns):
+ #   Column       Non-Null Count  Dtype 
+---  ------       --------------  ----- 
+ 0   row_n        391 non-null    int64 
+ 1   id           390 non-null    object
+ 2   name         391 non-null    object
+ 3   gender       391 non-null    object
+ 4   species      391 non-null    object
+ 5   birthday     391 non-null    object
+ 6   personality  391 non-null    object
+ 7   song         380 non-null    object
+ 8   phrase       391 non-null    object
+ 9   full_id      391 non-null    object
+ 10  url          391 non-null    object
+dtypes: int64(1), object(10)
+memory usage: 33.7+ KB
+gender
+male      204
+female    187
+Name: count, dtype: int64----
+
+
+
+
++*In[5]:*+
+[source, ipython3]
+----
+import pandas as pd
+url = "https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-05/villagers.csv"
+villagers_data = pd.read_csv(url)
+villagers_data.isnull().sum()
+----
+
+
++*Out[5]:*+
+----row_n           0
+id              1
+name            0
+gender          0
+species         0
+birthday        0
+personality     0
+song           11
+phrase          0
+full_id         0
+url             0
+dtype: int64----
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
++*In[6]:*+
+[source, ipython3]
+----
+import pandas as pd
+url = "https://raw.githubusercontent.com/mwaskom/seaborn-data/master/titanic.csv"
+df = pd.read_csv(url)
+print(df.head())
+print(df.columns)
+age_stats_by_class = df.groupby("pclass")["age"].describe()
+print(age_stats_by_class)
+----
+
+
++*Out[6]:*+
+----
+   survived  pclass     sex   age  sibsp  parch     fare embarked  class  \
+0         0       3    male  22.0      1      0   7.2500        S  Third   
+1         1       1  female  38.0      1      0  71.2833        C  First   
+2         1       3  female  26.0      0      0   7.9250        S  Third   
+3         1       1  female  35.0      1      0  53.1000        S  First   
+4         0       3    male  35.0      0      0   8.0500        S  Third   
+
+     who  adult_male deck  embark_town alive  alone  
+0    man        True  NaN  Southampton    no  False  
+1  woman       False    C    Cherbourg   yes  False  
+2  woman       False  NaN  Southampton   yes   True  
+3  woman       False    C  Southampton   yes  False  
+4    man        True  NaN  Southampton    no   True  
+Index(['survived', 'pclass', 'sex', 'age', 'sibsp', 'parch', 'fare',
+       'embarked', 'class', 'who', 'adult_male', 'deck', 'embark_town',
+       'alive', 'alone'],
+      dtype='object')
+        count       mean        std   min   25%   50%   75%   max
+pclass                                                           
+1       186.0  38.233441  14.802856  0.92  27.0  37.0  49.0  80.0
+2       173.0  29.877630  14.001077  0.67  23.0  29.0  36.0  70.0
+3       355.0  25.140620  12.495398  0.42  18.0  24.0  32.0  74.0
+----
+
+
+
+
++*In[8]:*+
+[source, ipython3]
+----
+import pandas as pd
+url = "https://raw.githubusercontent.com/mwaskom/seaborn-data/master/titanic.csv"
+df = pd.read_csv(url)
+print(df.describe())
+age_stats_by_class = df.groupby("pclass")["age"].describe()
+print(age_stats_by_class)
+----
+
+
++*Out[8]:*+
+----
+         survived      pclass         age       sibsp       parch        fare
+count  891.000000  891.000000  714.000000  891.000000  891.000000  891.000000
+mean     0.383838    2.308642   29.699118    0.523008    0.381594   32.204208
+std      0.486592    0.836071   14.526497    1.102743    0.806057   49.693429
+min      0.000000    1.000000    0.420000    0.000000    0.000000    0.000000
+25%      0.000000    2.000000   20.125000    0.000000    0.000000    7.910400
+50%      0.000000    3.000000   28.000000    0.000000    0.000000   14.454200
+75%      1.000000    3.000000   38.000000    1.000000    0.000000   31.000000
+max      1.000000    3.000000   80.000000    8.000000    6.000000  512.329200
+        count       mean        std   min   25%   50%   75%   max
+pclass                                                           
+1       186.0  38.233441  14.802856  0.92  27.0  37.0  49.0  80.0
+2       173.0  29.877630  14.001077  0.67  23.0  29.0  36.0  70.0
+3       355.0  25.140620  12.495398  0.42  18.0  24.0  32.0  74.0
+----
+
+
+
+
+
+
++*In[11]:*+
+[source, ipython3]
+----
+import pandas as pd
+df = pd.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/titanic.csv")
+df.describe()
+----
+
+
++*Out[11]:*+
+----
+[cols=",,,,,,",options="header",]
+|===
+| |survived |pclass |age |sibsp |parch |fare
+|count |891.000000 |891.000000 |714.000000 |891.000000 |891.000000
+|891.000000
+
+|mean |0.383838 |2.308642 |29.699118 |0.523008 |0.381594 |32.204208
+
+|std |0.486592 |0.836071 |14.526497 |1.102743 |0.806057 |49.693429
+
+|min |0.000000 |1.000000 |0.420000 |0.000000 |0.000000 |0.000000
+
+|25% |0.000000 |2.000000 |20.125000 |0.000000 |0.000000 |7.910400
+
+|50% |0.000000 |3.000000 |28.000000 |0.000000 |0.000000 |14.454200
+
+|75% |1.000000 |3.000000 |38.000000 |1.000000 |0.000000 |31.000000
+
+|max |1.000000 |3.000000 |80.000000 |8.000000 |6.000000 |512.329200
+|===
+----
+
+
+
+
+
+
+
+
+
+
+
+
